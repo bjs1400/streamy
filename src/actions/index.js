@@ -15,6 +15,8 @@ export const signOut = () => {
     };
 };
 
+//****REMINDER: streams.post/get/etc. follows RESTful principals and is working as our backend api =)  */
+
 export const createStream = (formValues) => async (dispatch, getState) => { //the dispatch function gets returned to us by redux-thunk
     const { userId } = getState().auth; // 
     const response = await streams.post('/streams', { ...formValues, userId }); // we are making a post request to /streams 
@@ -36,16 +38,18 @@ export const fetchStream = (id) => async dispatch => {
     dispatch({ type: FETCH_STREAM, payload: response.data })
 };
 
-export const editstream = (id, formValues) => async dispatch => {
-    const response = await streams.put(`/streams/${id}`, formValues);
+export const editStream = (id, formValues) => async dispatch => {
+    const response = await streams.patch(`/streams/${id}`, formValues);
 
     dispatch({ type: EDIT_STREAM, payload: response.data });
+    history.push('/');
 }
 
 export const deleteStream = (id) => async dispatch => {
     await streams.delete(`/streams/${id}`);
 
     dispatch({ type: DELETE_STREAM, payload: id });
+    history.push('/');
 };
 
 

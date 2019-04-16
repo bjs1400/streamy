@@ -9,15 +9,13 @@ class StreamList extends React.Component {
     }
 
     renderAdmin(stream) {
-        if (stream.userId === this.props.currentUserId) {
+        if (stream.userId === this.props.currentUserId) { /* if this is the current user's stream off add'l delete/edit btns */
             return (
                 <div className="right floated content">
-                    <button className="ui button primary">
-                        Edit
-                    </button>
-                    <button className="ui button negative">
+                    <Link to={`/streams/edit/${stream.id}`} className="ui button primary">Edit</Link>
+                    <Link to={`/streams/delete/${stream.id}`} className="ui button negative">
                         Delete
-                    </button>
+                    </Link>
                 </div>
             );
         }
